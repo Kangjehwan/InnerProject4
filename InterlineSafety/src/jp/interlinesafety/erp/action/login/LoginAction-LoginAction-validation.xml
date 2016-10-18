@@ -1,0 +1,15 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+ "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	<field name="uId">
+        <field-validator type="requiredstring">
+        	<message>IDを入力してください。</message>
+        </field-validator>
+    </field>
+    	<field name="uPw">
+        <field-validator type="requiredstring">
+        	<message>PWを入力してください。</message>
+        </field-validator>
+    </field>
+</validators>

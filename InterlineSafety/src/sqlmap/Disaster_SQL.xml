@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="Disaster" type="jp.interlinesafety.erp.model.disaster.DisasterVo" />
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="DisasterResult" class="Disaster">
+		<result property="DisasterId" column="DisasterId" columnIndex="1" />
+		<result property="YYYYMMDD" column="YYYYMMDD" columnIndex="2" />
+		<result property="DisasterPlace" column="DisasterPlace" columnIndex="3" />
+		<result property="Disaster" column="Disaster" columnIndex="4" />
+		<result property="DisasterStateId" column="DisasterStateId" columnIndex="5" />
+		<result property="UserId" column="UserId" columnIndex="6" />
+		<!-- <result property="Update" column="Update" columnIndex="7" /> -->
+		<result property="DisasterStateName" column="DisasterStateName" columnIndex="7" />
+	</resultMap>
+
+
+	<!-- list -->
+	<select id="DisasterList" parameterClass="java.util.Map" resultMap="DisasterResult">
+		SELECT A.DisasterId, A.YYYYMMDD, A.DisasterPlace, A.Disaster, A.DisasterStateId,
+		A.UserId, B.DisasterStateName
+		FROM DISASTER_INFORM_LIST A
+		INNER JOIN DISASTER_STATE_LIST B ON A.DisasterStateId = B.DisasterStateId
+
+	<dynamic prepend="where">
+			<isNotEmpty prepend="AND" property="DisasterId">
+				A.DisasterId = #DisasterId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="YYYYMMDD">
+				A.YYYYMMDD = #YYYYMMDD#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="DisasterPlace">
+				A.DisasterPlace = #DisasterPlace#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="Disaster">
+				A.Disaster = #Disaster#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="DisasterStateId">
+				A.DisasterStateId = #DisasterStateId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="UserId">
+				A.UserId = #UserId#
+			</isNotEmpty>
+			<!-- <isNotEmpty prepend="AND" property="Update">
+				Update = #Update#
+			</isNotEmpty> -->
+
+		</dynamic>
+
+		order by A.DisasterId desc
+		<!-- order by groups desc , step asc -->
+		<isNotEmpty property="start">
+			<isNotEmpty property="end">
+				limit $start$, $end$
+			</isNotEmpty>
+		</isNotEmpty>
+
+	</select>
+
+
+	<!-- 글번호 가지고 넘어갈때  -->
+	<select id="DisasterOne" parameterClass="java.util.Map" resultMap="DisasterResult">
+		SELECT * FROM DISASTER_INFORM_LIST A
+		INNER JOIN DISASTER_STATE_LIST B ON A.DisasterStateId = B.DisasterStateId
+		WHERE DisasterId = #DisasterId#
+	</select>
+
+
+	<!-- insert -->
+	<insert id="DisasterInsert" parameterClass="Disaster">
+		INSERT INTO DISASTER_INFORM_LIST (
+		DisasterId, YYYYMMDD, DisasterPlace, Disaster, DisasterStateId, UserId )
+		values (
+		#DisasterId#, #YYYYMMDD#, #DisasterPlace#, #Disaster#, #DisasterStateId#, #UserId# )
+
+	</insert>
+
+
+	<!-- 정보 수정  -->
+	<update id="DisasterUpdate" parameterClass="Disaster">
+		UPDATE DISASTER_INFORM_LIST
+		SET
+		YYYYMMDD = #YYYYMMDD# ,
+		DisasterPlace = #DisasterPlace# ,
+		Disaster = #Disaster#,
+		DisasterStateId = #DisasterStateId#,
+		UserId = #UserId#
+
+		WHERE DisasterId = #DisasterId#
+	</update>
+
+
+	<!-- 삭제 기능  -->
+	<delete id="DisasterDelete" parameterClass="Integer">
+		DELETE FROM DISASTER_INFORM_LIST WHERE DisasterId = #value#
+	</delete>
+
+
+
+</sqlMap>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- 作成者 : 李 珍瑞 -->
+<!-- 作成日付 : 2016.01.27 -->
+<sqlMap>
+  <!-- CurrenDisasterId -->
+  <select id="TestDisasterId" parameterClass="java.util.Map" resultClass="String">
+	  	SELECT 
+	      DisasterId 
+	    FROM disaster_inform_list 
+	    WHERE disasterStateId = 1
+  </select>
+  
+  <!-- CurrenDisaster --> 
+  <typeAlias alias="SafetyCheck" type="jp.interlinesafety.erp.model.safetycheck.StateCheckVo"/>
+   <resultMap id="SafetyCheckResult" class="SafetyCheck" >
+    <result property="DisasterPlace" column="DisasterPlace" columnIndex="1"/>
+   	<result property="YYYYMMDD" column="YYYYMMDD" columnIndex="2"/>
+    <result property="Disaster" column="Disaster" columnIndex="3"/>
+  </resultMap>
+  <select id="ShowCurrenDisaster" parameterClass="java.util.Map" resultMap="SafetyCheckResult"  >
+		SELECT
+			DISFORM.Disaster,
+			DISFORM.YYYYMMDD,
+			DISFORM.DisasterPlace
+		FROM
+			DISASTER_INFORM_LIST DISFORM,
+			DISASTER_STATE_LIST DISSTA
+		WHERE DISFORM.DisasterStateId = DISSTA.DisasterStateId
+		  AND DISSTA.DisasterStateId = #DisasterStateId2#
+  </select>
+	
+  <!-- SafetyCheck List -->
+  <typeAlias alias="SafetyCheck2" type="jp.interlinesafety.erp.model.safetycheck.StateCheckVo"/>
+   <resultMap id="SafetyCheckResult2" class="SafetyCheck2" >
+    <result property="UserId" column="UserId" columnIndex="1"/>
+    <result property="UserName" column="UserName" columnIndex="2"/>
+   	<result property="WhereaboutsName" column="WhereaboutsName" columnIndex="3"/>
+   	<result property="PhysicalCondition" column="PhysicalCondition" columnIndex="4"/>
+   	<result property="SafetyInformComment" column="SafetyInformComment" columnIndex="5"/>
+   	<result property="Udate" column="Udate" columnIndex="6"/>
+   	<result property="DisasterId" column="DisasterId" columnIndex="7"/>
+  </resultMap>  
+  <select id="ShowSafetyCheck" parameterClass="java.util.Map" resultMap="SafetyCheckResult2"  >
+		SELECT * FROM user_list d left join (
+			SELECT a.userId, a.DisasterId, a.SafetyInformComment, a.PhysicalCondtionId, a.WhereaboutsId,
+			     DATE_FORMAT(a.Udate,'%Y/%m/%d %H:%i:%s') AS Udate
+				from safety_inform_list a inner join 
+			(Select DisasterId,DisasterStateId  from disaster_inform_list where disasterStateId = 1)b 
+				ON a.disasterId = b.disasterId)c 
+				ON d.userId = c.userId
+			left join (select * from whereabouts_list)f
+				ON f.WhereaboutsId = c.WhereaboutsId
+			left join (select * from physical_condition_list)g
+			ON g.PhysicalCondtionId = c.PhysicalCondtionId	
+  </select>
+  
+  <!-- SafetyCheck Insert -->
+  <typeAlias alias="SafetyCheck3" type="jp.interlinesafety.erp.model.safetycheck.StateCheckVo"/>
+   <resultMap id="SafetyCheckResult3" class="SafetyCheck3" >
+    <result property="DisasterId" column="DisasterId" columnIndex="1"/>
+    <result property="UserId" column="UserId" columnIndex="2"/>
+    <result property="WhereaboutsId" column="WhereaboutsId" columnIndex="3"/>
+    <result property="PhysicalCondtionId" column="PhysicalCondtionId" columnIndex="4"/>
+    <result property="SafetyInformComment" column="SafetyInformComment" columnIndex="5"/>
+  </resultMap>  
+  <insert id="DoWrite" parameterClass="SafetyCheck3">
+	  	INSERT INTO safety_inform_list (
+	  		DisasterId,
+	  		UserId,
+	  		WhereaboutsId,
+	  		PhysicalCondtionId,
+	  		SafetyInformComment	
+	  	) VALUES (
+	  		#DisasterId#,
+	  		#UserId#,
+	  		#WhereaboutsId#,
+	  		#PhysicalCondtionId#,
+	  		#SafetyInformComment#	
+	  	)
+  </insert>
+    
+   <!-- SafetyCheck Update -->
+  <typeAlias alias="SafetyCheck4" type="jp.interlinesafety.erp.model.safetycheck.StateCheckVo"/>
+   <resultMap id="SafetyCheckResult4" class="SafetyCheck4" >
+    <result property="WhereaboutsId" column="WhereaboutsId" columnIndex="3"/>
+    <result property="PhysicalCondtionId" column="PhysicalCondtionId" columnIndex="4"/>
+    <result property="SafetyInformComment" column="SafetyInformComment" columnIndex="5"/>
+  </resultMap>
+  <update id='DoUpdate' parameterClass="SafetyCheck4">
+	   UPDATE safety_inform_list SET
+	   		WhereaboutsId = #WhereaboutsId#,
+	   		PhysicalCondtionId = #PhysicalCondtionId#,
+	   		SafetyInformComment = #SafetyInformComment#
+	   	WHERE DisasterId = #DisasterId#
+	   	  AND UserId = #UserId#
+  </update>
+  
+  <!-- SelectBox WhereaboutsName -->
+  <typeAlias alias="SafetyCheck5" type="jp.interlinesafety.erp.model.safetycheck.WhereaboutsVo"/>
+   <resultMap id="SafetyCheckResult5" class="SafetyCheck5" >
+    <result property="WhereaboutsId" column="WhereaboutsId" columnIndex="1"/>
+    <result property="WhereaboutsName" column="WhereaboutsName" columnIndex="2"/>
+  </resultMap>
+  <select id="SelectBoxWhereaboutsName" parameterClass="java.util.Map" resultMap="SafetyCheckResult5"  >
+  		SELECT
+  			WhereaboutsId,
+  			WhereaboutsName
+  		FROM whereabouts_list	
+  </select>
+
+  <!-- SelectBox PhysicalCondtion -->
+  <typeAlias alias="SafetyCheck6" type="jp.interlinesafety.erp.model.safetycheck.PhysicalConditionVo"/>
+   <resultMap id="SafetyCheckResult6" class="SafetyCheck6" >
+    <result property="PhysicalCondtionId" column="PhysicalCondtionId" columnIndex="1"/>
+    <result property="PhysicalCondition" column="PhysicalCondition" columnIndex="2"/>
+  </resultMap>  
+  <select id="SelectBoxPhysicalCondtion" parameterClass="java.util.Map" resultMap="SafetyCheckResult6"  >
+  		SELECT
+  			PhysicalCondtionId,
+  			PhysicalCondition
+  		FROM physical_condition_list	
+  </select>
+</sqlMap>

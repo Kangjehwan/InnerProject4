@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">   
+<!-- 作成者 : 李 珍瑞 -->
+<!-- 作成日付 : 2016.01.19 -->
+<struts>
+  <constant name="struts.i18n.encoding" value="UTF-8" />
+  <constant name="struts.devMode" value="true" />
+ <package name="SafetyCheck" namespace="/" extends="struts-default">
+ 	
+ 	<!-- Error処理 -->
+ 	<global-results>
+		<result name="error">/WEB-INF/jsp/safety_inform/IS_error.jsp</result>
+	</global-results>
+	<global-exception-mappings>
+		<exception-mapping result="error" exception="java.lang.Exception" />
+	</global-exception-mappings>
+  
+    <!-- List Action-->  
+    <action name="StateCheckListAction" class="jp.interlinesafety.erp.action.safetycheck.StateCheckListAction">
+       <interceptor-ref name="chain"/>
+	   <interceptor-ref name="params"/>
+	   <result name="success">/WEB-INF/jsp/safety_inform/IS_safety_inform.jsp</result>
+    </action>
+ 
+    <!-- Insert, Update Form Action-->
+    <action name="StateCheckWriteFormAction" class="jp.interlinesafety.erp.action.safetycheck.StateCheckWriteAction" method="form">
+      <result>/WEB-INF/jsp/safety_inform/IS_safety_write_form.jsp</result>
+    </action>
+    
+    <!-- Insert Action-->
+    <action name="StateCheckWriteAction" class="jp.interlinesafety.erp.action.safetycheck.StateCheckWriteAction">
+        <result name="success" type="redirectAction">StateCheckListAction</result>
+    </action> 
+
+    <!-- Update Action-->
+    <action name="StateCheckUpdateAction" class="jp.interlinesafety.erp.action.safetycheck.StateCheckUpdateAction">
+		<result name="success" type="redirectAction">StateCheckListAction</result>
+    </action>
+    
+ </package>
+ 
+
+   
+</struts>

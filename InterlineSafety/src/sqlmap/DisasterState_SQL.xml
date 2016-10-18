@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="DisasterState" type="jp.interlinesafety.erp.model.disaster.DisasterStateVo" />
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="DisasterStateResult" class="DisasterState">
+		<result property="DisasterStateId" column="DisasterStateId" columnIndex="1" />
+		<result property="DisasterStateName" column="DisasterStateName" columnIndex="2" />
+	</resultMap>
+
+
+	<!-- list -->
+	<select id="DisasterStateList" parameterClass="java.util.Map" resultMap="DisasterStateResult">
+		SELECT DisasterStateId, DisasterStateName
+		FROM DISASTER_STATE_LIST
+		
+	
+	<dynamic prepend="where">
+			<isNotEmpty prepend="AND" property="DisasterStateId">
+				DisasterStateId = #DisasterStateId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="UserId">
+				DisasterStateName = #DisasterStateName#
+			</isNotEmpty>
+		
+		</dynamic>
+
+		order by DisasterStateId asc
+		<!-- order by groups desc , step asc -->
+		<isNotEmpty property="start">
+			<isNotEmpty property="end">
+				limit $start$, $end$
+			</isNotEmpty>
+		</isNotEmpty>
+
+	</select> 
+	
+</sqlMap>

@@ -1,0 +1,30 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+ "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	<field name="YYYYMMDD">
+		<field-validator type="requiredstring">
+			<message>発生日時を入力してください。</message>
+		</field-validator>
+		<field-validator type="regex">
+			<param name="regex"><![CDATA[^(19|20)\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$]]></param>
+			<message>'20160128'形式で入力してください。</message>
+		</field-validator>
+	</field>
+	
+	<field name="DisasterPlace">
+	    <field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>発生場所を入力してください。</message>
+		</field-validator>
+	</field>
+	
+	<field name="Disaster">
+	    <field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>発生内容を入力してください。</message>
+		</field-validator>
+	</field>
+	
+	
+</validators>

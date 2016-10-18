@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+  <typeAlias alias="Login" type="jp.interlinesafety.erp.model.login.LoginVo"/>
+<!-- 리절트 맵 정의 -->
+  <resultMap id="LoginResult" class="Login" > 
+  	<result property="UserId" column="UserId" columnIndex="1"/>
+	<result property="UserName" column="UserName" columnIndex="2"/>
+    <result property="AuthorityId" column="AuthorityId" columnIndex="3"/>
+    <result property="Password" column="Password" columnIndex="4"/>
+  </resultMap>
+
+	<select id="LoginOne" parameterClass="String" resultMap="LoginResult">
+	SELECT user_inform.UserId, user_inform.UserName, user_list.AuthorityId, user_inform.Password
+	FROM user_inform user_inform
+	left join
+	user_list user_list
+	on user_inform.userid = user_list.userid
+	where user_inform.UserId = #UserId# 
+   </select>
+   
+</sqlMap>

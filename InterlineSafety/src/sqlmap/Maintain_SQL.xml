@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="Maintain" type="jp.interlinesafety.erp.model.maintain.MaintainVo" />
+	<!-- 리절트 맵 1 -->
+	<resultMap id="MaintainResult" class="Maintain">
+		<result property="UserName" column="UserName" columnIndex="1" />
+		<result property="UserId" column="UserId" columnIndex="2" />
+		<result property="AuthorityId" column="AuthorityId" columnIndex="3" />
+		<result property="AuthorityName" column="AuthorityName" columnIndex="4" />
+	</resultMap>
+
+	<typeAlias alias="Maintain1" type="jp.interlinesafety.erp.model.maintain.MaintainVo" />
+	<!-- 리절트 맵 2 -->
+	
+	<resultMap id="MaintainResult1" class="Maintain1">
+		<result property="AuthorityId" column="AuthorityId" columnIndex="1" />
+		<result property="AuthorityName" column="AuthorityName" columnIndex="2" />
+	</resultMap>
+	
+	
+	<!-- list -->
+	<select id="MaintainList" parameterClass="java.util.Map" resultMap="MaintainResult">
+		SELECT A.UserId, A.UserName, A.AuthorityId, B.AuthorityName
+		FROM USER_LIST A
+		INNER JOIN AUTHORITY_LIST B ON A.AuthorityId = B.AuthorityId
+		
+		
+	<dynamic prepend="where">
+			<isNotEmpty prepend="AND" property="UserId">
+				A.UserId = #UserId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="UserName">
+				A.UserName = #UserName#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="AuthorityId">
+				A.AuthorityId = #AuthorityId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="AuthorityName">
+				B.AuthorityName = #AuthorityName#
+			</isNotEmpty>		
+		</dynamic>
+
+		order by A.AuthorityId asc
+		<!-- order by groups desc , step asc -->
+		<isNotEmpty property="start">
+			<isNotEmpty property="end">
+				limit $start$, $end$
+			</isNotEmpty>
+		</isNotEmpty>
+
+	</select> 
+	
+	<select id="MainList" parameterClass="java.util.Map" resultMap="MaintainResult1">
+		SELECT *
+		FROM AUTHORITY_LIST 
+		
+	<dynamic prepend="where">
+			<isNotEmpty prepend="AND" property="AuthorityId">
+				AuthorityId = #AuthorityId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="AuthorityName">
+				AuthorityName = #AuthorityName#
+			</isNotEmpty>
+	
+		</dynamic>
+
+		order by AuthorityId desc
+		<!-- order by groups desc , step asc -->
+		<isNotEmpty property="start">
+			<isNotEmpty property="end">
+				limit $start$, $end$
+			</isNotEmpty>
+		</isNotEmpty>
+
+	</select> 
+
+	<insert id="MaintainInsert" parameterClass="Maintain">
+		INSERT INTO USER_LIST(UserName, UserId, AuthorityId)
+		values(#UserName#, #UserId#, #AuthorityId#)
+	</insert> 
+	
+	<insert id="MaintainInsert1" parameterClass="Maintain">
+		INSERT INTO USER_INFORM(UserId, UserName)
+		values(#UserId#, #UserName#)
+	</insert> 
+
+	<delete id="MaintainDelete" parameterClass="String">
+		DELETE FROM USER_INFORM WHERE UserId = #value#
+	</delete> 
+	
+		<delete id="MaintainDelete1" parameterClass="String">
+		DELETE FROM USER_LIST WHERE UserId = #value#
+	</delete> 
+	
+	<!--View에 데이터 출력-->
+	<select id="MaintainOne" parameterClass="java.util.Map" resultMap="MaintainResult">
+		SELECT A.UserId, A.UserName, A.AuthorityId, B.AuthorityName
+		FROM USER_LIST A
+		INNER JOIN AUTHORITY_LIST B ON A.AuthorityId = B.AuthorityId
+		WHERE UserId = #UserId#
+	</select> 
+<!--	
+	<select id="SelectCnt" parameterClass="java.util.Map" resultMap="MaintainResult">
+		SELECT count(*) as cnt FROM USER_LIST
+		WHERE UserId = #UserId#
+	</select> 
+-->
+	<update id="MaintainUpdate" parameterClass="Maintain">
+		UPDATE USER_LIST
+		SET 
+		UserName = #UserName#,
+		UserId = #UserId#,
+		AuthorityId = #AuthorityId#
+		
+		WHERE UserId = #UserId#
+	</update> 
+	
+	<update id="MaintainUpdate1" parameterClass="Maintain">
+		UPDATE USER_INFORM
+		SET 
+		UserName = #UserName#
+		WHERE UserId = #UserId#
+	</update> 
+	 
+	<update id="MaintainUpdate2" parameterClass="Maintain" >
+		UPDATE USER_INFORM
+		SET 
+		Password= 1111
+		
+		WHERE UserId = #UserId#
+	</update> 
+
+</sqlMap>

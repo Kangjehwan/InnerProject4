@@ -1,0 +1,26 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+ "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	<field name="UserName">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>名前を入力してください。</message>
+		</field-validator>
+	</field>
+	
+  	<field name="UserId">
+	<field-validator type="regex">
+	<param name="regex"><![CDATA[(^[0-9a-zA-Z]*$)]]></param>
+	<message>パスワードは英数字で入力してください。</message>
+	</field-validator>
+	</field>
+	
+	<field name="UserId">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>IDを入力してください。</message>
+		</field-validator>
+	</field>
+	
+</validators>

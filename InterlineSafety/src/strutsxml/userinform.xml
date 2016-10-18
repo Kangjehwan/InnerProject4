@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="userinfo" extends="struts-default">
+
+		<action name="UserInfoMove" class="jp.interlinesafety.erp.action.userinform.UfViewAction">
+			<interceptor-ref name="store">
+                <param name="operationMode">AUTOMATIC</param>
+            </interceptor-ref>
+			<result name="success">/WEB-INF/jsp/userinform/IS_user_inform.jsp</result>
+		</action>
+
+		<action name="UserInfoMoveForm" method="form" class="jp.interlinesafety.erp.action.userinform.UfViewAction">
+			<result name="success">/WEB-INF/jsp/userinform/IS_user_inform.jsp</result>
+		</action>
+
+		<action name="UserInfoModify" class="jp.interlinesafety.erp.action.userinform.UfUpdateAction">
+			<interceptor-ref name="store">
+                <param name="operationMode">AUTOMATIC</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+			<result type="redirectAction" name="success">UserInfoMoveForm</result>
+			<result type="redirectAction" name="input">UserInfoMove</result>
+			<result name="error">/WEB-INF/jsp/userinform/UfErrorMessege.jsp</result>
+		</action>
+
+		</package>
+</struts>

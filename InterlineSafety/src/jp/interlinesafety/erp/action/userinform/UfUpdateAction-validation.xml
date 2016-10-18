@@ -1,0 +1,35 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+ "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+
+	<field name="Password">
+		<field-validator type="regex">
+			<param name="regex"><![CDATA[(^[0-9a-zA-Z]*$)]]></param>
+			<message>パスワードは英数字で入力してください。</message>
+		</field-validator>
+		<field-validator type="requiredstring">
+			<message>パスワードを入力してください。</message>
+		</field-validator>
+	</field>
+
+
+	<field name="Address">
+		<field-validator type="requiredstring">
+			<message>住所を入力してください。</message>
+		</field-validator>
+	</field>
+
+	<field name="Tell">
+		<field-validator type="regex">
+			<param name="regex"><![CDATA[(^[0-9]{2,3}-[0-9]{4}-[0-9]{4}$)]]></param>
+			<message>電話番号、または携帯番号の形式ではありません。</message>
+		</field-validator>
+	</field>
+
+	<field name="Email">
+		<field-validator type="email">
+			<message>E-メールの形式ではありません。</message>
+		</field-validator>
+	</field>
+
+</validators>

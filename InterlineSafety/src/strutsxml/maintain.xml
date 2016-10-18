@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="lolo"  extends="struts-default">
+
+		<action name="MainListAction" class="jp.interlinesafety.erp.action.maintain.MainListAction">
+			<result>	
+			/WEB-INF/jsp/maintain/IS_user_maintain.jsp
+			</result>			
+		</action>
+
+		<action name="User" class="jp.interlinesafety.erp.action.maintain.MainListAction" method="form">
+		<interceptor-ref name="store">
+                <param name="operationMode">RETRIEVE</param>
+            </interceptor-ref>
+			<result>
+				/WEB-INF/jsp/maintain/IS_user_write.jsp
+			</result>		
+		</action>
+		
+		<action name="MainWriteAction" class="jp.interlinesafety.erp.action.maintain.MainWriteAction">
+				<interceptor-ref name="store">
+                <param name="operationMode">STORE</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+            
+			<result name="success" type="redirectAction">
+				<param name="actionName">MainListAction</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">User</param>
+			</result>
+		</action>
+		
+		<action name="MainDeleteAction" class="jp.interlinesafety.erp.action.maintain.MainDeleteAction">
+		<result type="chain">MainListAction</result>
+		</action> 
+
+		<action name="MainViewAction" class="jp.interlinesafety.erp.action.maintain.MainViewAction">
+		<result type="chain">User</result>
+		</action> 		
+		
+		<action name="MainModifyAction" class="jp.interlinesafety.erp.action.maintain.MainModifyAction">
+    	   	<interceptor-ref name="store">
+                <param name="operationMode">STORE</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+
+			<result type="chain" name="success">MainListAction</result>
+			<result type="chain" name="input">MainViewAction</result>
+			<result type="chain" name="error">MainviewAction</result>
+    	   
+  	    </action>
+  	    
+  	    <action name="MainModifyAction2" class="jp.interlinesafety.erp.action.maintain.MainModifyAction2">
+    	    <result type="chain">MainListAction</result>
+  	    </action>
+		
+	</package>
+</struts>
