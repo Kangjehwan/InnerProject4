@@ -1,5 +1,5 @@
 package jp.interlinesafety.erp.action.disaster;
 
-public class testttt {
+public class Test {
 
 }
