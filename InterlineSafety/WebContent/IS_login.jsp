@@ -12,7 +12,7 @@
 <title>Login</title>
 <style>
 .company_title p{
-	padding:		0 0 0 5px; 
+	padding:		0 0 0 5px;
 	margin:			5px 0 5px 0;
 	font-size:		24px;
 	color:			#003399;
@@ -32,6 +32,13 @@
 	<div class="container">
 		<div class="col-md-8" style="border: 3px solid #0066ff">
 			<br/>
+
+			<!--  -->
+			<s:form method="post" action="UserAddAction" class="form-inline">
+				<s:submit class="btn" value="会員登録"/>&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
+			</s:form><br/>
+			<!--  -->
+
 			<s:form method="post" action="LoginAction" class="form-inline">
 				<img src="<s:url value="/image/logo.png"/>" width="15%" height="15%" /><br/>
 				<div class="company_title"><p>INTERLINE SAFETY<br/>ログイン</p></div><br/>
