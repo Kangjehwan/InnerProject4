@@ -61,7 +61,7 @@
                         		<div class="form-top">
 	                        		<div class="form-top-left">
 	                        			<h3>今すぐ会員登録</h3>
-	                            		<p>登録は、たったの<strong>3分</strong>で完了します。</p>
+	                            		<p>登録は、たったの<strong>3分</strong>で完了します。11</p>
 	                        		</div>
 	                        		<div class="form-top-right">
 	                        			<i class="fa fa-pencil"></i>
@@ -69,39 +69,38 @@
 	                            </div>
 	                            <div class="form-bottom">
 				                    <s:form  action="UserConfirmAction" method="post" class="registration-form">
-				                    	<div class="form-group">
+				                    	<!-- <div class="form-group">
 				                    		<label class="sr-only" for="form-last-name">ID</label>
-				                        	<s:textfield name="ID" placeholder="ID" class="form-id form-control" id="form-id" />
+				                        	<input type="text" name="lastName" placeholder="ID" class="form-last-name form-control" id="form-last-name">
 				                        </div>
  				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-password">パスワード</label>
-				                        	<s:password name="password" placeholder="パスワード" class="form-password form-control" id="form-password" />
+				                        	<label class="sr-only" for="form-first-name">パスワード</label>
+				                        	<input type="text" name="firstName" placeholder="パスワード" class="form-first-name form-control" id="form-first-name">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-password2">パスワード確認</label>
-				                        	<s:password name="password2" placeholder="パスワード確認" class="form-password2 form-control" id="form-password2" />
+				                        	<div id="IdCheckSection"><p>${ actionErrors[0] }</p></div>
+				                        	<label class="sr-only" for="form-email">パスワード確認</label>
+				                        	<input type="text" name="email" placeholder="パスワード確認" class="form-email form-control" id="email">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-name">名前</label>
-				                        	<s:textfield name="name" placeholder="名前" class="form-name form-control" id="form-name" />
+				                        	<label class="sr-only" for="form-nick-name">名前</label>
+				                        	<input type="text" name="nickName" placeholder="名前" class="form-email form-control" id="form-nick-name">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-email">メールアドレス</label>
-				                        	<s:textfield  name="email" placeholder="メールアドレス" class="form-email form-control" id="form-email" />
+				                        	<label class="sr-only" for="form-password">メールアドレス</label>
+				                        	<input type="password" id="password" name="password" placeholder="メールアドレス" class="form-password form-control" >
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-phone">電話番号</label>
-				                        	<s:textfield name="phone" placeholder="電話番号" class="form-phone form-control" id="form-phone" />
+				                        	<label class="sr-only" for="form-password">電話番号</label>
+				                        	<input type="password" id="password2" name="password2" placeholder="電話番号" class="form-password form-control" >
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-address">住所</label>
-				                        	<s:textfield name="address" placeholder="住所" class="form-address form-control" id="form-address" />
-				                        </div>
-				                        <button id="memberAdd" type="submit" class="btn">会員登録</button>
-				                    </s:form>
+				                        	<label class="sr-only" for="form-password">住所</label>
+				                        	<input type="password" id="password2" name="password2" placeholder="住所" class="form-password form-control" >
+				                        </div> -->
+				                        <button id="passwordCheck" type="submit" class="btn">会員登録</button>
 
-				                    <s:form  action="Return" method="post" class="registration-form">
-				                        <button id="return" type="submit" class="btn2" >戻る</button>
+				                        <!--  <button id="passwordCheck" type="submit" class="btn2" action="Return.action">戻る</button>-->
 				                    </s:form>
 			                    </div>
                         	</div>

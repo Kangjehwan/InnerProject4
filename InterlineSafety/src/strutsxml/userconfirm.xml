@@ -7,7 +7,10 @@
 
 		<action name="UserConfirmAction" class="jp.interlinesafety.erp.action.userconfirm.UserConfirmAction"  method="Start">
 			<result name="success">/WEB-INF/jsp/user_add/IS_user_confirm.jsp</result>
+		</action>
 
+		<action name="Return" class="jp.interlinesafety.erp.action.userconfirm.UserConfirmAction"  method="Start">
+			<result name="success">IS_login.jsp</result>
 		</action>
 
 
