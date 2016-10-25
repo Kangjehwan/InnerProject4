@@ -5,6 +5,12 @@
 <struts>
 	<package name="board"  extends="struts-default">
 
+
+<action name="UserAddAction" class="jp.interlinesafety.erp.action.useradd.UserAddAction"  method="Start">
+			<result name="success">/WEB-INF/jsp/user_add/IS_user_add.jsp</result>
+
+		</action>
+
 		<action name="LoginAction" class="jp.interlinesafety.erp.action.login.LoginAction" method="checkAction">
 			<result name="success">/WEB-INF/jsp/IS_initial.jsp</result>
 			<result name="error">/WEB-INF/jsp/login/ErrorMessege.jsp</result>

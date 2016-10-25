@@ -35,20 +35,23 @@
 
 
 
-			<s:form method="post" class="form-inline">
+			<s:form method="post"  action="LoginAction"  class="form-inline">
 				<img src="<s:url value="/image/logo.png"/>" width="15%" height="15%" /><br/>
 				<div class="company_title"><p>INTERLINE SAFETY<br/>ログイン</p></div><br/>
 				<p class="myfont">ID : </p>
 				<s:textfield  class="form-control" name="uId"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">${fieldErrors.uId}</font><br/><br/>
 				<p class="myfont">PW : </p>
 				<s:password  class="form-control" name="uPw"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">${fieldErrors.uPw}</font><br/><br/>
-		  		<s:submit class="btn btn-primary" value="ログイン" action="LoginAction"  />&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
-			</s:form><br/>
-			<!--  -->
-			<s:form method="post" action="UserAddAction" class="form-inline">
-				<s:submit class="btn" value="会員登録"/>&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
-			</s:form><br/>
-			<!--  -->
+		  		<s:submit class="btn btn-primary" value="ログイン" />&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
+			<!-- 2016.10.25 修正 姜 Start -->
+			<s:submit class="btn" value="会員登録" action="UserAddAction"/>&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
+			<!-- 2016.10.25 修正 姜 End -->
+			</s:form><br>
+
+
+
+
+
 	 	</div>
 	</div>
 </body>

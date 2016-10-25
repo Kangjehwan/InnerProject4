@@ -14,5 +14,9 @@
    <include file="/strutsxml/userinform.xml"/>
    <include file="/strutsxml/SafetyCheck.xml"/>
    <include file="/strutsxml/maintain.xml"/>
+   <!-- 2016.10.25 追加 姜 Start -->
    <include file="/strutsxml/useradd.xml"/>
+   <include file="/strutsxml/userconfirm.xml"/>
+   <!-- 2016.10.25 追加 姜 Start -->
+
 </struts>
