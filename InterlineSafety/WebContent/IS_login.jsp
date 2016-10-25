@@ -43,9 +43,12 @@
 				<p class="myfont">PW : </p>
 				<s:password  class="form-control" name="uPw"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">${fieldErrors.uPw}</font><br/><br/>
 		  		<s:submit class="btn btn-primary" value="ログイン" action="LoginAction"  />&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
-				<s:submit class="btn" value="会員登録" action="UserAddAction" />&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
 			</s:form><br/>
-
+			<!--  -->
+			<s:form method="post" action="UserAddAction" class="form-inline">
+				<s:submit class="btn" value="会員登録"/>&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
+			</s:form><br/>
+			<!--  -->
 	 	</div>
 	</div>
 </body>
