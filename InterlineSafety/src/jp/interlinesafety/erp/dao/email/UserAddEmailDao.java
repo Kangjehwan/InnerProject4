@@ -1,4 +1,4 @@
-package jp.interlinesafety.erp.dao.useradd;
+package jp.interlinesafety.erp.dao.email;
 
 import java.sql.SQLException;
 
@@ -7,12 +7,12 @@ import jp.interlinesafety.erp.util.SqlMapLocator;
 
 
 
-public class UserAddCompleteDao {
-	private static UserAddCompleteDao singleton;
-	private UserAddCompleteDao() {};
-	public static UserAddCompleteDao getInstance(){
+public class UserAddEmailDao {
+	private static UserAddEmailDao singleton;
+	private UserAddEmailDao() {};
+	public static UserAddEmailDao getInstance(){
 		if (singleton == null){
-			singleton = new UserAddCompleteDao();
+			singleton = new UserAddEmailDao();
 		}
 		return singleton;
 	}

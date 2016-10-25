@@ -1,4 +1,4 @@
-package jp.interlinesafety.erp.action.useradd;
+package jp.interlinesafety.erp.action.email;
 
 import java.net.URL;
 
@@ -8,17 +8,17 @@ import org.apache.commons.mail.HtmlEmail;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-import jp.interlinesafety.erp.dao.useradd.UserAddCompleteDao;
+import jp.interlinesafety.erp.dao.email.UserAddEmailDao;
 import jp.interlinesafety.erp.model.userinform.UserInformVo;
 
-public class UserAddCompleteAction extends ActionSupport implements ModelDriven<Object> {
+public class UserAddEmailAction extends ActionSupport implements ModelDriven<Object> {
 
 	// private static final long serialVersionUID = 1864307099461602776L;
 	private UserInformVo vo;
-	private UserAddCompleteDao dao;
+	private UserAddEmailDao dao;
 
-	public UserAddCompleteAction() {
-		dao = UserAddCompleteDao.getInstance();
+	public UserAddEmailAction() {
+		dao = UserAddEmailDao.getInstance();
 	}
 
 	@Override
