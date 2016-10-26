@@ -41,11 +41,14 @@
 				<p class="myfont">ID : </p>
 				<s:textfield  class="form-control" name="uId"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">${fieldErrors.uId}</font><br/><br/>
 				<p class="myfont">PW : </p>
-				<s:password  class="form-control" name="uPw"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">${fieldErrors.uPw}</font><br/><br/>
-		  		<s:submit class="btn btn-primary" value="ログイン" />&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
-			<!-- 2016.10.25 修正 姜 Start -->
-			<s:submit class="btn" value="会員登録" action="UserAddAction"/>&nbsp;&nbsp;&nbsp;<font color="red">${ actionErrors[0] }</font>
-			<!-- 2016.10.25 修正 姜 End -->
+				<s:password  class="form-control" name="uPw"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">${fieldErrors.uPw}</font>
+				<!-- 2016.10.26 修正 姜 Start -->
+				<br/><br/><font color="red">${ actionErrors[0] }</font><br/><br>
+		  		<!-- 2016.10.26 修正 姜 End -->
+		  		<s:submit class="btn btn-primary" value="ログイン" />&nbsp;&nbsp;&nbsp;
+				<!-- 2016.10.25 追加 姜 Start -->
+				<s:submit class="btn btn-success" value="会員登録" action="UserAddAction"/>
+				<!-- 2016.10.25 追加 姜 End -->
 			</s:form><br>
 
 
